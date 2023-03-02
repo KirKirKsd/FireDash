@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 24757468}
   - component: {fileID: 24757469}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Bonfire (Light)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,13 +185,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24757467}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2747922, y: 2.2747922, z: 2.2747922}
+  m_LocalScale: {x: 1.1373961, y: 1.1373961, z: 1.1373961}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 78165479}
-  m_RootOrder: 0
+  m_Children:
+  - {fileID: 78165479}
+  m_Father: {fileID: 1622317778}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &24757469
 SpriteRenderer:
@@ -459,12 +460,11 @@ Transform:
   m_GameObject: {fileID: 78165477}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 24757468}
-  m_Father: {fileID: 1622317778}
-  m_RootOrder: 1
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 24757468}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &78165480
 MonoBehaviour:
@@ -994,7 +994,7 @@ GameObject:
   - component: {fileID: 545489865}
   - component: {fileID: 545489864}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Test Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1461,6 +1461,37 @@ MonoBehaviour:
   block_right: {fileID: 1390665222}
   block_down: {fileID: 1304187458}
   block_left: {fileID: 1181400909}
+--- !u!1 &861937517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861937518}
+  m_Layer: 0
+  m_Name: Shoot Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861937518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861937517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2002435251}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &964469038
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1590,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1146338718}
-  - component: {fileID: 1146338719}
   m_Layer: 0
   m_Name: Blocks
   m_TagString: Untagged
@@ -1586,23 +1616,6 @@ Transform:
   m_Father: {fileID: 1622317778}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1146338719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146338717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa74fb59f3050f8409118ddb529aa5d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  block_up: {fileID: 0}
-  block_right: {fileID: 0}
-  block_down: {fileID: 0}
-  block_left: {fileID: 0}
-  game: {fileID: 0}
 --- !u!1 &1181400908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2122,8 @@ MonoBehaviour:
   health: 100
   healthSlider: {fileID: 964469040}
   gun: {fileID: 2002435251}
+  bullet: {fileID: 3362460154501188091, guid: 39facd32bde326e488bd7b92e1cd8485, type: 3}
+  shootPoint: {fileID: 861937518}
   rb: {fileID: 1338292385}
 --- !u!61 &1338292384
 BoxCollider2D:
@@ -2303,7 +2318,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1338292382}
-  - {fileID: 78165479}
+  - {fileID: 24757468}
   - {fileID: 1146338718}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2358,7 +2373,7 @@ GameObject:
   - component: {fileID: 1704936833}
   - component: {fileID: 1704936832}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Test Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2870,7 +2885,8 @@ Transform:
   m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 861937518}
   m_Father: {fileID: 1325111664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

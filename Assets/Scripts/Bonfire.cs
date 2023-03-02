@@ -8,7 +8,7 @@ public class Bonfire : MonoBehaviour {
 	public Slider healthSlider;
 
 	// gameobjects
-	public GameObject light;
+	public new GameObject light;
 
 	private void Start() {
 		max_health = health;

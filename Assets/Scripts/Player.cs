@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,10 +19,18 @@ public class Player : MonoBehaviour {
     // transform
     public static Vector3 Pos;
 
+	// bullet
+	public GameObject bullet;
+	private bool canShoot = true;
+	private bool reloading = false;
+	private GameObject nearEnemy = null;
+	public Transform shootPoint;
+
 	// components
 	public Rigidbody2D rb;
 
 	private void Start() {
+		transform.localScale = Variables.playerSize;
 		max_health = health;
 	}
 
@@ -30,6 +39,7 @@ public class Player : MonoBehaviour {
 		SetSliderValue();
 		Pos = transform.position;
 		GetGunAngle();
+		Shoot();
 	}
 
 	void Movement() {
@@ -43,7 +53,7 @@ public class Player : MonoBehaviour {
 
 	GameObject GetNearestEnemy() {
         GameObject[] allEnimies = null;
-        GameObject nearEnemy = null;
+        nearEnemy = null;
 		float distance = 100001f;
 		float nearestDistance = 10000f;
 
@@ -62,6 +72,26 @@ public class Player : MonoBehaviour {
 	}
 	
 	void GetGunAngle() {
-        gunAngle = Utility.AngleTowardsMouse(transform.position, GetNearestEnemy().transform.position);
+		GameObject nearestEnemy = GetNearestEnemy();
+		if (nearestEnemy != null) {
+            gunAngle = Utility.AngleTowardsMouse(transform.position, nearestEnemy.transform.position);
+        }
+	}
+
+	void Shoot() {
+		if (canShoot && nearEnemy != null) {
+			Instantiate(bullet, shootPoint.position, Quaternion.Euler(0f, 0f, gunAngle - 90f));
+			canShoot = false;
+		}
+		else if (reloading == false) {
+            reloading = true;
+			StartCoroutine(Reload());
+        }
+	}
+
+	IEnumerator Reload() {
+		yield return new WaitForSeconds(1);
+		canShoot = true;
+		reloading = false;
 	}
 }

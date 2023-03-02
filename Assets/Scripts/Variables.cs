@@ -11,5 +11,5 @@ public class Variables : MonoBehaviour {
     public static Vector3 I1 = Vector3.one * screen_width / 6;
 
     // player
-    public static float playerSize = screen_width / 24;
+    public static Vector3 playerSize = Vector3.one * screen_width / 24;
 }

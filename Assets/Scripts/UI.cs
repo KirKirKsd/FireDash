@@ -14,6 +14,8 @@ public class UI : MonoBehaviour {
     private void Start() {
         CenterGame();
         TransformBlocks();
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
     }
 
     void CenterGame() {
