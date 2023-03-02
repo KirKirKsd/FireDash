@@ -90,7 +90,7 @@ public class Player : MonoBehaviour {
 	}
 
 	IEnumerator Reload() {
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.5f);
 		canShoot = true;
 		reloading = false;
 	}

@@ -4,6 +4,7 @@ public class UI : MonoBehaviour {
     // game position
     public RectTransform gameUI;
     public GameObject game;
+    public static Vector3 centerPoint;
 
     // blocks
     public Transform block_up;
@@ -19,7 +20,7 @@ public class UI : MonoBehaviour {
     }
 
     void CenterGame() {
-        Vector3 centerPoint = gameUI.TransformPoint(gameUI.rect.center);
+        centerPoint = gameUI.TransformPoint(gameUI.rect.center);
         game.transform.position = centerPoint;
     }
 
