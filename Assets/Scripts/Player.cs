@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
 	public float speed = 4f;
 
 	// health
-	public float health = 100f;
+	[SerializeField] public static float health = 100f;
 	private float max_health;
 	public Slider healthSlider;
 
