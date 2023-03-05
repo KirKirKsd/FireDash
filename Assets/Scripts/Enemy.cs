@@ -1,6 +1,4 @@
 using System.Collections;
-using System.ComponentModel.Design;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -14,7 +12,14 @@ public class Enemy : MonoBehaviour {
 	private bool playerStay = false;
 	public float damage = 5f;
 
-	private void Update() {
+	public bool visible = false;
+	public SpriteRenderer sprite;
+
+    private void Start() {
+		sprite.enabled = false;
+    }
+
+    private void Update() {
 		if (needMove) {
 			transform.position = Vector2.MoveTowards(transform.position, Player.Pos, speed * Time.deltaTime);
 		}
@@ -32,6 +37,8 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0) {
 			Destroy(gameObject);
 		}
+
+		sprite.enabled = visible;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -39,6 +46,9 @@ public class Enemy : MonoBehaviour {
             needMove = false;
 			playerStay = true;
         }
+		else {
+			print("collision");
+		}
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
@@ -53,4 +63,11 @@ public class Enemy : MonoBehaviour {
 		canShoot = true;
 		reloading = false;
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+		print("!");
+        if (collision.collider.tag == "Lights") {
+			print("!");
+		}
+    }
 }

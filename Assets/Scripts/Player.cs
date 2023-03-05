@@ -19,6 +19,9 @@ public class Player : MonoBehaviour {
     // transform
     public static Vector3 Pos;
 
+	// light
+	public GameObject ligth;
+
 	// bullet
 	public GameObject bullet;
 	private bool canShoot = true;
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour {
 
 	private void Start() {
 		transform.localScale = Variables.playerSize;
+		ligth.transform.localScale = Vector3.one * (Variables.I2.x / Variables.playerSize.x);
 		max_health = health;
 	}
 
