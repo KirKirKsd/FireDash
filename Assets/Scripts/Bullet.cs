@@ -3,9 +3,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
     public Rigidbody2D rb;
     public float speed = 10f;
-    public float damage = 5f;
+    private float damage;
 
     private void Start() {
+        damage = Player.damage;
         Destroy(gameObject, 2);
     }
 
@@ -14,7 +15,7 @@ public class Bullet : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Enemy") {
+        if (collision.gameObject.CompareTag("Enemy")) {
             collision.gameObject.GetComponent<Enemy>().health -= damage;
         }
         Destroy(gameObject);
