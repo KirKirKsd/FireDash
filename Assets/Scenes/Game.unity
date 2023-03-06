@@ -2792,10 +2792,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1622317777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fddcafb2b8eaa84bab4f013e1e3db80, type: 3}
+  m_Script: {fileID: 11500000, guid: d041a1d56280590409058ee53e118ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  canSpawn: 1
+  easyEnemies:
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  mediumEnemies: []
+  hardEnemies: []
+  waveNum: 1
+  enemies: []
+  amount: 0
+  left: 0
+  wavesCounterText: {fileID: 74392046}
 --- !u!1 &1702867064
 GameObject:
   m_ObjectHideFlags: 0
