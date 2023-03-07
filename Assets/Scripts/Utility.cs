@@ -17,7 +17,14 @@ public class Utility : MonoBehaviour {
 
     public static GameObject[] AddToArray(GameObject[] array, GameObject item) {
         List<GameObject> newArray = array.ToList();
-        newArray.Append(item);
+        newArray.Add(item);
+        array = newArray.ToArray();
+        return array;
+    }
+
+    public static GameObject[] RemoveFromArray(GameObject[] array, GameObject item) {
+        List<GameObject> newArray = array.ToList();
+        newArray.Remove(item);
         array = newArray.ToArray();
         return array;
     }

@@ -1,106 +1,135 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
 
 public class Waves : MonoBehaviour {
 
-    public static bool isWaveStarting = true;
-    public static bool isWave = false;
-    public bool canSpawn = true;
-    public GameObject[] easyEnemies;
-    public GameObject[] mediumEnemies;
-    public GameObject[] hardEnemies;
+    public List<GameObject> easyEnemies;
+    public List<GameObject> mediumEnemies;
+    public List<GameObject> hardEnemies;
 
-    public int waveNum = 1;
-    public GameObject[] enemies;
-    public int amount = 0;
-    public int left = 0;
+    private List<GameObject> enemies = new();
 
-    [SerializeField] public Slider waveSlider;
+    public int count;
+    public int left;
+    public int waveNum = 2;
+
+    public Slider waveProgressSlider;
     public TextMeshProUGUI wavesCounterText;
-    
 
     private void Start() {
-        int item = Random.Range(0, easyEnemies.Length);
-        enemies = Utility.AddToArray(enemies, easyEnemies[item]);
+        AddToEnemies("easy");
+        StartCoroutine(Wave());
     }
 
     private void Update() {
-        if (isWaveStarting) {
-            BeforeWave();
-        }
+        SetUI();
+    }
 
-        if (isWave && canSpawn) {
-            SpawnEnemy();
-        }
-
+    void SetUI() {
+        float cof = (float) left / count;
+        waveProgressSlider.value = 1 - cof;
         wavesCounterText.text = waveNum.ToString();
-        waveSlider.value = left / amount;
-    }
-
-    void BeforeWave() {
-        isWaveStarting = false;
-        
-        if (waveNum <= 10) {
-            amount = waveNum * 2;
-        }
-        else {
-            amount = 10 + waveNum;
-        }
-
-        left = amount;
-        isWave = true;
-    }
-
-    void SpawnEnemy() {
-        if (left > 0) {
-            StartCoroutine(Cooldown());
-        
-            int item = Random.Range(0, enemies.Length - 1);
-            SpawnEnemy(enemies[item]);
-
-            left--;
-        }
-        else {
-            AfterWave();
-        }
-    }
-
-    IEnumerator Cooldown() {
-        canSpawn = false;
-        yield return new WaitForSeconds(5);
-        canSpawn = true;
-    }
-
-    void AfterWave() {
-        isWave = false;
-        waveNum++;
-        StartCoroutine(CooldownWaves());
-    }
-
-    IEnumerator CooldownWaves() {
-        yield return new WaitForSeconds(10);
-        isWaveStarting = true;
     }
     
-    private Vector3 position;
-
-    public void SpawnEnemy(GameObject enemy) {
-        position = new Vector3(Random.Range(Variables.screen_width / 2 * -1, Variables.screen_width / 2), Random.Range(Variables.screen_width / 2 * -1, Variables.screen_width / 2), 0f);
-        while (true) {
-            if (Vector3.Distance(position, Vector3.zero) > Variables.I3.x) {
-                position.y += UI.CenterPoint.y;
+    private IEnumerator Wave() {
+        // before
+        switch (waveNum) {
+            case <= 10:
+                count = waveNum * 2;
                 break;
+            case > 10:
+                count = waveNum + 10;
+                break;
+        }
+
+        left = count;
+        
+        // during
+        while (left > 0) {
+            Spawner.SpawnEnemy(enemies[Random.Range(0, enemies.Count)]);
+            left--;
+            yield return new WaitForSeconds(2);
+        }
+        
+        // after
+        int enemiesNow = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        while (enemiesNow != 0) {
+            enemiesNow = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (enemiesNow <= 1) {
+            yield return new WaitForSeconds(5);
+            if (waveNum <= 19 && waveNum % 2 != 0) {
+                AddVarietyToEnemies();
             }
-            else { 
-                position = new Vector3(Random.Range(Variables.screen_width / 2 * -1, Variables.screen_width / 2), Random.Range(Variables.screen_width / 2 * -1, Variables.screen_width / 2), 0f);
-            } 
-            Instantiate(enemy, position, Quaternion.Euler(0f, 0f, 0f));
+            waveNum++;
+            StartCoroutine(Wave());
+        }
+    }
+
+    private void AddToEnemies(string difficulty) {
+        int item;
+        switch (difficulty) {
+            case "easy":
+                item = Random.Range(0, easyEnemies.Count);
+                enemies.Add(easyEnemies[item]);
+                easyEnemies.Remove(easyEnemies[item]);
+                break;
+            case "medium":
+                item = Random.Range(0, mediumEnemies.Count);
+                enemies.Add(mediumEnemies[item]);
+                mediumEnemies.Remove(mediumEnemies[item]);
+                break;
+            case "hard":
+                item = Random.Range(0, hardEnemies.Count);
+                enemies.Add(hardEnemies[item]);
+                hardEnemies.Remove(hardEnemies[item]);
+                break;
+            default: 
+                print("ERROR...");
+                break;
+        }
+    }
+
+    private void AddVarietyToEnemies() {
+        switch (waveNum) {
+            case 3:
+                AddToEnemies("easy");
+                break;
+            case 5:
+                AddToEnemies("medium");
+                break;
+            case 7:
+                AddToEnemies("easy");
+                break;
+            case 9:
+                AddToEnemies("medium");
+                break;
+            case 11:
+                AddToEnemies("easy");
+                break;
+            case 13:
+                AddToEnemies("hard");
+                break;
+            case 15:
+                AddToEnemies("easy");
+                break;
+            case 17:
+                AddToEnemies("medium");
+                break;
+            case 19:
+                AddToEnemies("hard");
+                break;
         }
     }
     
+    private void SpawnEnemy(GameObject enemy) {
+        Instantiate(enemy, Vector3.zero, Quaternion.identity);
+    }
+
 }

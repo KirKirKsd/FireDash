@@ -2221,7 +2221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28.5, y: 50}
+  m_AnchoredPosition: {x: -2.3, y: 50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1188141584
@@ -2518,6 +2518,7 @@ MonoBehaviour:
   light: {fileID: 1610083832}
   bullet: {fileID: 3362460154501188091, guid: 39facd32bde326e488bd7b92e1cd8485, type: 3}
   shootPoint: {fileID: 861937518}
+  damageLocal: 10
   rb: {fileID: 1338292385}
   scoreText: {fileID: 602826654}
 --- !u!61 &1338292384
@@ -2795,15 +2796,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d041a1d56280590409058ee53e118ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canSpawn: 1
   easyEnemies:
   - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
-  mediumEnemies: []
-  hardEnemies: []
-  waveNum: 1
-  enemies: []
-  amount: 0
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  mediumEnemies:
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  hardEnemies:
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  - {fileID: 14664459984246083, guid: b215e2b4d05423346aa1336a4c50ff4b, type: 3}
+  count: 0
   left: 0
+  waveNum: 1
+  waveProgressSlider: {fileID: 1995074260}
   wavesCounterText: {fileID: 74392046}
 --- !u!1 &1702867064
 GameObject:
@@ -3236,7 +3241,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

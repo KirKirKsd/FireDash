@@ -28,7 +28,8 @@ public class Player : MonoBehaviour {
 	private bool reloading = false;
 	private GameObject nearEnemy = null;
 	public Transform shootPoint;
-	public static float damage = 25f;
+	public float damageLocal = 10f;
+	public static float Damage;
 
 	// components
 	public Rigidbody2D rb;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour {
 	public TextMeshProUGUI scoreText;
 
 	private void Start() {
+		Damage = damageLocal;
 		transform.localScale = Variables.playerSize;
 		light.transform.localScale = Vector3.one * (Variables.I2.x / Variables.playerSize.x);
 		maxHealth = health;

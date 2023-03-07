@@ -121,7 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  health: 20
+  health: 50
+  count: 10
   damage: 5
   visible: 0
   sprite: {fileID: 14664459984246081}

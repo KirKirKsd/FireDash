@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
     private float damage;
 
     private void Start() {
-        damage = Player.damage;
+        damage = Player.Damage;
         Destroy(gameObject, 2);
     }
 
