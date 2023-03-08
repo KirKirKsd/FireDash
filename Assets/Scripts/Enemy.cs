@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
-using System.ComponentModel.Design;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-	public float speed = 1.5f;
+	public float speed = 0.5f;	
 	public float health = 50f;
+	public int count = 10;
 
 	private bool needMove = true;
 
@@ -14,7 +14,14 @@ public class Enemy : MonoBehaviour {
 	private bool playerStay = false;
 	public float damage = 5f;
 
-	private void Update() {
+	public bool visible = false;
+	public SpriteRenderer sprite;
+
+	private void Start() {
+		sprite.enabled = false;
+    }
+
+    private void Update() {
 		if (needMove) {
 			transform.position = Vector2.MoveTowards(transform.position, Player.Pos, speed * Time.deltaTime);
 		}
@@ -32,17 +39,19 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0) {
 			Destroy(gameObject);
 		}
+
+		sprite.enabled = visible;
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.CompareTag("Player")) {
             needMove = false;
 			playerStay = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.CompareTag("Player")) {
             needMove = true;
 			playerStay = false;
         }
@@ -53,4 +62,9 @@ public class Enemy : MonoBehaviour {
 		canShoot = true;
 		reloading = false;
 	}
+
+    private void OnDestroy() {
+	    Player.score += count;
+    }
+
 }
