@@ -125,7 +125,9 @@ MonoBehaviour:
   count: 10
   damage: 5
   visible: 0
+  localVisible: 0
   sprite: {fileID: 14664459984246081}
+  difficulty: 1
 --- !u!58 &5535359857079193821
 CircleCollider2D:
   m_ObjectHideFlags: 0

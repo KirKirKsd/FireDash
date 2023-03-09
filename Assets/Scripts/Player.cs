@@ -74,7 +74,7 @@ public class Player : MonoBehaviour {
 		for (int i = 0; i < allEnemies.Length; i++) {
 			distance = Vector3.Distance(transform.position, allEnemies[i].transform.position);
 
-			if (distance < nearestDistance && allEnemies[i].gameObject.GetComponent<Enemy>().visible) {
+			if ((distance < nearestDistance && ((allEnemies[i].gameObject.GetComponent<Enemy>().visible && allEnemies[i].gameObject.GetComponent<Enemy>().difficulty == 3) || (allEnemies[i].gameObject.GetComponent<Enemy>().difficulty == 2 && allEnemies[i].gameObject.GetComponent<Enemy>().localVisible))) || distance < nearestDistance && allEnemies[i].gameObject.GetComponent<Enemy>().difficulty == 1) {
 				nearEnemy = allEnemies[i];
 				nearestDistance = distance;
 			}

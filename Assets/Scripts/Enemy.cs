@@ -14,11 +14,20 @@ public class Enemy : MonoBehaviour {
 	private bool playerStay = false;
 	public float damage = 5f;
 
-	public bool visible = false;
+	public bool visible;
+	public bool localVisible;
 	public SpriteRenderer sprite;
 
+	public int difficulty;
+
 	private void Start() {
-		sprite.enabled = false;
+		if (difficulty > 1) {
+			sprite.enabled = false;
+		}
+
+		if (difficulty == 2) {
+			StartCoroutine(VisibleOrNot());
+		}
     }
 
     private void Update() {
@@ -40,7 +49,13 @@ public class Enemy : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		sprite.enabled = visible;
+		if (difficulty == 3 || (difficulty == 2 && localVisible == false)) {
+			sprite.enabled = visible;
+			localVisible = visible;
+		}
+		else if (difficulty == 2) {
+			sprite.enabled = localVisible;
+		}
 	}
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -65,6 +80,14 @@ public class Enemy : MonoBehaviour {
 
     private void OnDestroy() {
 	    Player.score += count;
+    }
+
+    IEnumerator VisibleOrNot() {
+	    localVisible = false;
+	    yield return new WaitForSeconds(3);
+	    localVisible = true;
+	    yield return new WaitForSeconds(3);
+	    StartCoroutine(VisibleOrNot());
     }
 
 }
